@@ -1,7 +1,7 @@
 object Main: TMain
-  Left = 387
+  Left = 269
   Height = 506
-  Top = 158
+  Top = 131
   Width = 704
   Caption = 'Main'
   OnCreate = FormCreate
@@ -13,10 +13,17 @@ object Main: TMain
     DatabaseName = 'x1222'
     KeepConnection = False
     Password = 'lionsale'
+    Transaction = SQLTransaction1
     UserName = 'lionsale'
     HostName = '192.168.178.21'
     LogEvents = []
-    left = 80
-    top = 24
+    left = 24
+    top = 16
+  end
+  object SQLTransaction1: TSQLTransaction
+    Active = False
+    Database = myConnect
+    left = 104
+    top = 16
   end
 end
