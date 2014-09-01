@@ -1,0 +1,463 @@
+object Kontakt_Edit: TKontakt_Edit
+  Left = 598
+  Height = 565
+  Top = 372
+  Width = 605
+  BorderStyle = bsDialog
+  Caption = 'Kontakt bearbeiten'
+  ClientHeight = 565
+  ClientWidth = 605
+  Color = clWhite
+  Font.CharSet = ANSI_CHARSET
+  Font.Height = -13
+  Font.Name = 'Arial'
+  Font.Pitch = fpVariable
+  Font.Quality = fqDraft
+  KeyPreview = True
+  OnCreate = FormCreate
+  OnKeyUp = FormKeyUp
+  OnShow = FormShow
+  Position = poMainFormCenter
+  LCLVersion = '1.2.4.0'
+  object Shape1: TShape
+    Left = 0
+    Height = 44
+    Top = 0
+    Width = 605
+    Align = alTop
+    Brush.Color = 15329769
+    Pen.Style = psClear
+  end
+  object Label1: TLabel
+    Left = 16
+    Height = 19
+    Top = 12
+    Width = 207
+    Caption = 'Informationen zum Kontakt'
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = 5789784
+    Font.Height = -16
+    Font.Name = 'Arial'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    Font.Style = [fsBold]
+    ParentColor = False
+    ParentFont = False
+  end
+  object Panel1: TPanel
+    Left = 0
+    Height = 46
+    Top = 519
+    Width = 605
+    Align = alBottom
+    ClientHeight = 46
+    ClientWidth = 605
+    Color = 15329769
+    ParentColor = False
+    TabOrder = 0
+    object ButtonSave: TButton
+      Left = 368
+      Height = 30
+      Top = 8
+      Width = 111
+      Caption = '&Speichern'
+      OnClick = ButtonSaveClick
+      TabOrder = 0
+    end
+    object ButtonAbort: TButton
+      Left = 480
+      Height = 30
+      Top = 8
+      Width = 111
+      Caption = '&Abbrechen'
+      ModalResult = 2
+      TabOrder = 1
+    end
+  end
+  object PageControl1: TPageControl
+    Left = 16
+    Height = 448
+    Top = 56
+    Width = 576
+    ActivePage = TabSheet1
+    TabIndex = 0
+    TabOrder = 1
+    object TabSheet1: TTabSheet
+      Caption = 'Grunddaten'
+      ClientHeight = 419
+      ClientWidth = 568
+      object kontakt_anrede: TComboBox
+        Left = 16
+        Height = 24
+        Top = 16
+        Width = 76
+        ItemHeight = 16
+        ItemIndex = 0
+        Items.Strings = (
+          'Herrn'
+          'Frau'
+        )
+        Style = csDropDownList
+        TabOrder = 0
+        Text = 'Herrn'
+      end
+      object kontakt_vorname: TEdit
+        Left = 16
+        Height = 24
+        Top = 72
+        Width = 260
+        TabOrder = 1
+      end
+      object Label2: TLabel
+        Left = 16
+        Height = 16
+        Top = 56
+        Width = 51
+        Caption = 'Vorname'
+        ParentColor = False
+      end
+      object Label3: TLabel
+        Left = 16
+        Height = 16
+        Top = 104
+        Width = 62
+        Caption = 'Nachname'
+        ParentColor = False
+      end
+      object kontakt_nachname: TEdit
+        Left = 16
+        Height = 24
+        Top = 120
+        Width = 260
+        TabOrder = 2
+      end
+      object Label4: TLabel
+        Left = 16
+        Height = 16
+        Top = 152
+        Width = 37
+        Caption = 'E-Mail'
+        ParentColor = False
+      end
+      object kontakt_email: TEdit
+        Left = 16
+        Height = 24
+        Top = 168
+        Width = 260
+        TabOrder = 3
+      end
+      object Label5: TLabel
+        Left = 16
+        Height = 16
+        Top = 200
+        Width = 40
+        Caption = 'Telefon'
+        ParentColor = False
+      end
+      object kontakt_telefon: TEdit
+        Left = 16
+        Height = 24
+        Top = 216
+        Width = 260
+        TabOrder = 4
+      end
+      object Label6: TLabel
+        Left = 16
+        Height = 16
+        Top = 248
+        Width = 22
+        Caption = 'Fax'
+        ParentColor = False
+      end
+      object kontakt_fax: TEdit
+        Left = 16
+        Height = 24
+        Top = 264
+        Width = 260
+        TabOrder = 5
+      end
+      object Label7: TLabel
+        Left = 16
+        Height = 16
+        Top = 296
+        Width = 31
+        Caption = 'Mobil'
+        ParentColor = False
+      end
+      object kontakt_abteilung: TEdit
+        Left = 16
+        Height = 24
+        Top = 312
+        Width = 260
+        TabOrder = 6
+      end
+      object kontakt_nicht_anrufen: TCheckBox
+        Left = 288
+        Height = 20
+        Top = 312
+        Width = 96
+        Caption = 'Nicht anrufen'
+        TabOrder = 7
+      end
+      object kontakt_nicht_faxen: TCheckBox
+        Left = 288
+        Height = 20
+        Top = 288
+        Width = 85
+        Caption = 'Nicht faxen'
+        TabOrder = 8
+      end
+      object kontakt_nicht_mailen: TCheckBox
+        Left = 288
+        Height = 20
+        Top = 264
+        Width = 92
+        Caption = 'Nicht mailen'
+        TabOrder = 9
+      end
+      object kontakt_typ: TComboBox
+        Left = 16
+        Height = 24
+        Top = 368
+        Width = 180
+        ItemHeight = 16
+        ItemIndex = 0
+        Items.Strings = (
+          'Interessent'
+          'Kunde'
+          'Mitarbeiter'
+          'Service'
+        )
+        Style = csDropDownList
+        TabOrder = 10
+        Text = 'Interessent'
+      end
+      object Label8: TLabel
+        Left = 288
+        Height = 16
+        Top = 56
+        Width = 45
+        Caption = 'Strasse'
+        ParentColor = False
+      end
+      object kontakt_strasse: TEdit
+        Left = 288
+        Height = 24
+        Top = 72
+        Width = 260
+        TabOrder = 11
+      end
+      object Label9: TLabel
+        Left = 288
+        Height = 16
+        Top = 104
+        Width = 56
+        Caption = 'Strasse 2'
+        ParentColor = False
+      end
+      object kontakt_strasse2: TEdit
+        Left = 288
+        Height = 24
+        Top = 120
+        Width = 260
+        TabOrder = 12
+      end
+      object Label14: TLabel
+        Left = 288
+        Height = 16
+        Top = 152
+        Width = 53
+        Caption = 'PLZ / Ort'
+        ParentColor = False
+      end
+      object kontakt_plz: TEdit
+        Left = 288
+        Height = 24
+        Top = 168
+        Width = 64
+        TabOrder = 13
+      end
+      object kontakt_ort: TEdit
+        Left = 360
+        Height = 24
+        Top = 168
+        Width = 188
+        TabOrder = 14
+      end
+      object Label18: TLabel
+        Left = 288
+        Height = 16
+        Top = 200
+        Width = 28
+        Caption = 'Land'
+        ParentColor = False
+      end
+      object kontakt_land: TComboBox
+        Left = 288
+        Height = 24
+        Top = 216
+        Width = 260
+        ItemHeight = 16
+        TabOrder = 15
+        Text = 'kontakt_land'
+      end
+    end
+    object TabSheet2: TTabSheet
+      Caption = 'Optional'
+      ClientHeight = 419
+      ClientWidth = 568
+      object Label10: TLabel
+        Left = 16
+        Height = 16
+        Top = 16
+        Width = 76
+        Caption = 'Telefon Privat'
+        ParentColor = False
+      end
+      object kontakt_telefonprivat: TEdit
+        Left = 16
+        Height = 24
+        Top = 32
+        Width = 260
+        TabOrder = 0
+      end
+      object Label11: TLabel
+        Left = 288
+        Height = 16
+        Top = 16
+        Width = 58
+        Caption = 'Fax Privat'
+        ParentColor = False
+      end
+      object kontakt_faxprivat: TEdit
+        Left = 288
+        Height = 24
+        Top = 32
+        Width = 260
+        TabOrder = 1
+      end
+      object Label12: TLabel
+        Left = 16
+        Height = 16
+        Top = 64
+        Width = 67
+        Caption = 'Mobil Privat'
+        ParentColor = False
+      end
+      object kontakt_mobilprivat: TEdit
+        Left = 16
+        Height = 24
+        Top = 80
+        Width = 260
+        TabOrder = 2
+      end
+      object Label13: TLabel
+        Left = 16
+        Height = 16
+        Top = 112
+        Width = 64
+        Caption = 'Geburtstag'
+        ParentColor = False
+      end
+      object kontakt_geburtstag: TDateEdit
+        Left = 16
+        Height = 24
+        Top = 128
+        Width = 238
+        CalendarDisplaySettings = [dsShowHeadings, dsShowDayNames]
+        OKCaption = 'OK'
+        CancelCaption = 'Cancel'
+        DateOrder = doNone
+        ButtonWidth = 23
+        CharCase = ecNormal
+        NumGlyphs = 1
+        MaxLength = 0
+        TabOrder = 3
+      end
+      object Label15: TLabel
+        Left = 16
+        Height = 16
+        Top = 176
+        Width = 52
+        Caption = 'E-Mail 2:'
+        ParentColor = False
+      end
+      object kontakt_email2: TEdit
+        Left = 16
+        Height = 24
+        Top = 192
+        Width = 260
+        TabOrder = 4
+      end
+      object Label16: TLabel
+        Left = 288
+        Height = 16
+        Top = 176
+        Width = 52
+        Caption = 'E-Mail 3:'
+        ParentColor = False
+      end
+      object kontakt_email3: TEdit
+        Left = 288
+        Height = 24
+        Top = 192
+        Width = 260
+        TabOrder = 5
+      end
+    end
+    object TabSheet4: TTabSheet
+      Caption = 'Firmen'
+      ClientHeight = 419
+      ClientWidth = 568
+      object Label17: TLabel
+        Left = 16
+        Height = 16
+        Top = 16
+        Width = 244
+        Caption = 'Zu welchen Firmen gehört dieser Kontakt?'
+        ParentColor = False
+      end
+      object ListView2: TListView
+        Left = 16
+        Height = 326
+        Top = 40
+        Width = 536
+        AutoWidthLastColumn = True
+        Columns = <        
+          item
+            AutoSize = True
+            Caption = 'Firmenname'
+            Width = 532
+          end>
+        GridLines = True
+        HideSelection = False
+        Items.LazData = {
+          4A00000002000000FFFFFFFFFFFFFFFFFFFFFFFF000000000D0000004D757374
+          65726669726D612031FFFFFFFFFFFFFFFFFFFFFFFF000000000D0000004D7573
+          7465726669726D612032
+        }
+        MultiSelect = True
+        ReadOnly = True
+        RowSelect = True
+        TabOrder = 0
+        ViewStyle = vsReport
+      end
+      object Button7: TButton
+        Left = 16
+        Height = 25
+        Top = 370
+        Width = 136
+        Caption = 'Hinzufügen'
+        TabOrder = 1
+      end
+      object Button8: TButton
+        Left = 152
+        Height = 25
+        Top = 370
+        Width = 100
+        Caption = 'Löschen'
+        TabOrder = 2
+      end
+    end
+  end
+end

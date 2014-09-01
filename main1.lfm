@@ -1,0 +1,22 @@
+object Main: TMain
+  Left = 387
+  Height = 506
+  Top = 158
+  Width = 704
+  Caption = 'Main'
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  LCLVersion = '1.2.4.0'
+  object myConnect: TMySQL51Connection
+    Connected = False
+    LoginPrompt = False
+    DatabaseName = 'x1222'
+    KeepConnection = False
+    Password = 'lionsale'
+    UserName = 'lionsale'
+    HostName = '192.168.178.21'
+    LogEvents = []
+    left = 80
+    top = 24
+  end
+end
