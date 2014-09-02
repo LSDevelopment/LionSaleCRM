@@ -28,7 +28,7 @@ var
 
 implementation
 
-uses Kontakt_Edit1,global;
+uses Kontakt_Edit1,FormularDesigner1,global;
 
 {$R *.lfm}
 
@@ -36,12 +36,33 @@ uses Kontakt_Edit1,global;
 
 procedure TMain.FormCreate(Sender: TObject);
 var Kontakt_Edit : TKontakt_Edit;
+    lang : TSQLQuery;
 begin
+  langdata := TStringList.Create;
+
   myConnect.Open;
   global.dbcon := myConnect;
-  Kontakt_Edit := TKontakt_Edit.create(Self);
-  Kontakt_Edit.showModal;
-  Kontakt_Edit.free;
+
+  // Sprache einlesen
+  lang := querysql('SELECT sprachen_id,sprachen_de FROM sprachen');
+  while not lang.EOF do
+  begin
+    langdata.Values[lang.FieldByName('sprachen_id').AsString] := lang.FieldByName('sprachen_de').AsString;
+    lang.Next;
+  end;
+  lang.Close;
+  FreeAndNil(lang);
+  // ******************
+
+
+  FormularDesigner := TFormularDesigner.create(Self);
+  FormularDesigner.showmodal;
+  FormularDesigner.free;
+  Application.Terminate;
+
+  //Kontakt_Edit := TKontakt_Edit.create(Self);
+  //Kontakt_Edit.showModal;
+  //Kontakt_Edit.free;
 end;
 
 procedure TMain.FormDestroy(Sender: TObject);

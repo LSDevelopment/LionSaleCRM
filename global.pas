@@ -8,6 +8,7 @@ uses
   Classes, SysUtils, mysql51conn, FileUtil,sqldb, db, Forms, Controls, Graphics, Dialogs;
 
 var dbcon : TDatabase;
+var langdata : TStringList;
 
 function querysql(sqlstr : string) : TSqlQuery;
 

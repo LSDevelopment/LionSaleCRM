@@ -1,9 +1,9 @@
 object Kontakt_Edit: TKontakt_Edit
-  Left = 250
+  Left = 640
   Height = 565
-  Top = 117
+  Top = 145
   Width = 761
-  BorderStyle = bsSingle
+  BorderStyle = bsDialog
   Caption = 'Kontakt bearbeiten'
   ClientHeight = 565
   ClientWidth = 761
@@ -79,62 +79,11 @@ object Kontakt_Edit: TKontakt_Edit
     Height = 448
     Top = 56
     Width = 736
-    ActivePage = TabSheet4
+    ActivePage = KillSheet
     TabIndex = 0
     TabOrder = 1
-    object TabSheet4: TTabSheet
-      Caption = 'Firmen'
-      ClientHeight = 419
-      ClientWidth = 728
-      object Label17: TLabel
-        Left = 16
-        Height = 16
-        Top = 16
-        Width = 244
-        Caption = 'Zu welchen Firmen gehört dieser Kontakt?'
-        ParentColor = False
-      end
-      object ListView2: TListView
-        Left = 16
-        Height = 326
-        Top = 40
-        Width = 536
-        AutoWidthLastColumn = True
-        Columns = <        
-          item
-            AutoSize = True
-            Caption = 'Firmenname'
-            Width = 532
-          end>
-        GridLines = True
-        HideSelection = False
-        Items.LazData = {
-          4A00000002000000FFFFFFFFFFFFFFFFFFFFFFFF000000000D0000004D757374
-          65726669726D612031FFFFFFFFFFFFFFFFFFFFFFFF000000000D0000004D7573
-          7465726669726D612032
-        }
-        MultiSelect = True
-        ReadOnly = True
-        RowSelect = True
-        TabOrder = 0
-        ViewStyle = vsReport
-      end
-      object Button7: TButton
-        Left = 16
-        Height = 25
-        Top = 370
-        Width = 136
-        Caption = 'Hinzufügen'
-        TabOrder = 1
-      end
-      object Button8: TButton
-        Left = 152
-        Height = 25
-        Top = 370
-        Width = 100
-        Caption = 'Löschen'
-        TabOrder = 2
-      end
+    object KillSheet: TTabSheet
+      Caption = '-'
     end
   end
 end

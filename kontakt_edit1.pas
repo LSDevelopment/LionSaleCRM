@@ -13,17 +13,13 @@ type
   { TKontakt_Edit }
 
   TKontakt_Edit = class(TForm)
-    Button7: TButton;
-    Button8: TButton;
     ButtonSave: TButton;
     ButtonAbort: TButton;
     Label1: TLabel;
-    Label17: TLabel;
-    ListView2: TListView;
     PageControl1: TPageControl;
     Panel1: TPanel;
     Shape1: TShape;
-    TabSheet4: TTabSheet;
+    KillSheet: TTabSheet;
     procedure ButtonSaveClick(Sender: TObject);
     procedure CBDraw(Control: TWinControl; Index: Integer; ARect: TRect; State: TOwnerDrawState);
     procedure FormCreate(Sender: TObject);
@@ -55,6 +51,7 @@ var tempquery : TSQLQuery;
     customLabel : TLabel;
     customEdit : TEdit;
     customCombo : TComboBox;
+    customCheckBox : TCheckBox;
     lastTab : string;
     lastTopLeft,lastTopRight : integer;
     dataList : TStringList;
@@ -84,14 +81,14 @@ begin
          customPanel := TPanel.Create(customTab);
          customPanel.Parent := customTab;
          customPanel.Height:=34;
-         customPanel.Width:=PageControl1.Width div 2 - 25;
+         customPanel.Width:=PageControl1.Width div 2 - 25 -5;
          customPanel.BorderStyle := bsNone;
          customPanel.BevelInner:=bvNone;
          customPanel.BevelOuter:=bvNone;
          if (tempquery.FieldByName('formular_seite').AsString='0') then
          begin
             customPanel.Top := lastTopleft;
-            customPanel.Left := 0;
+            customPanel.Left := 5;
             lastTopleft := lastTopleft + customPanel.Height;
          end else
          begin
@@ -103,13 +100,22 @@ begin
          // Bezeichner
          customLabel := TLabel.Create(customPanel);
          customLabel.Parent := customPanel;
-         customLabel.Caption := tempquery.FieldByName('formular_bezeichnung').AsString+':';
+         customLabel.Caption := tempquery.FieldByName('formular_bezeichnung').AsString;
          customLabel.AutoSize := false;
          customLabel.Align := alLeft;
          customLabel.Width := 120;
          customLabel.Layout := tlCenter;
          customLabel.WordWrap := true;
          customLabel.Alignment:= taRightJustify;
+
+         // Überschrift
+         if (tempquery.FieldByName('formular_feldtyp').AsString = 'subject') then
+         begin
+            customLabel.Font.Style := customLabel.Font.Style+[fsBold];
+            customLabel.Font.Style := customLabel.Font.Style+[fsUnderline];
+            customLabel.Alignment := taLeftJustify;
+            customLabel.Font.Color:=clGray;
+         end;
 
          // Text
          if (tempquery.FieldByName('formular_feldtyp').AsString = 'text') then
@@ -119,6 +125,18 @@ begin
             customEdit.Left:=customLabel.Width + 10;
             customEdit.Width := customPanel.Width - customEdit.Left - 10;
             customEdit.Top := (customPanel.Height div 2) - (customEdit.Height div 2);
+         end;
+
+         // Checkbox
+         if (tempquery.FieldByName('formular_feldtyp').AsString = 'checkbox') then
+         begin
+            customCheckBox := TCheckBox.Create(customPanel);
+            customCheckBox.Parent := customPanel;
+            customCheckBox.Left:=customLabel.Width + 10;
+            customCheckBox.Width := customPanel.Width - customEdit.Left - 10;
+            customCheckBox.Top := (customPanel.Height div 2) - (customCheckBox.Height div 2);
+            customCheckBox.Caption := customLabel.Caption;
+            customLabel.Visible:=False;
          end;
 
          // Combobox
@@ -151,7 +169,7 @@ end;
 // Bei Formularerstellung Tab auf den ersten setzen
 procedure TKontakt_Edit.FormCreate(Sender: TObject);
 begin
-  PageControl1.ActivePageIndex := 0;
+  PageControl1.Pages[0].Free;
 end;
 
 procedure TKontakt_Edit.FormKeyUp(Sender: TObject; var Key: Word;

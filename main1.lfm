@@ -1,7 +1,7 @@
 object Main: TMain
-  Left = 269
+  Left = 538
   Height = 506
-  Top = 131
+  Top = 264
   Width = 704
   Caption = 'Main'
   OnCreate = FormCreate
