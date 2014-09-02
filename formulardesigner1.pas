@@ -132,7 +132,11 @@ begin
     customLabel.Height:=customShape.Height;
     customLabel.Layout:=tlCenter;
     customLabel.Width:=120;
-    customLabel.Visible:=false;;
+    customLabel.Visible:=false;
+    customLabel.Cursor:=crHandPoint;
+    customLabel.DragMode:=dmAutomatic;
+    customLabel.OnDragOver:=@MyDragOver;
+    customLabel.OnDragDrop:=@MyDragDrop;
 
     customEdit := TEdit.Create(customPanel);
     customEdit.Parent := customPanel;
@@ -175,9 +179,20 @@ end;
 procedure TFormulardesigner.MyDragDrop(Sender, Source: TObject; X,
   Y: Integer);
 var i : integer;
+    theSender : TObject;
 begin
+  theSender := sender;
+  if theSender is TLabel then
+  begin
+     for i := 0 to GlobalShapeList.Count-1 do
+     if (TStringList(GlobalShapeList.Objects[i]).Objects[1]=theSender) then
+     begin
+       theSender := TStringList(GlobalShapeList.Objects[i]).Objects[0];
+       break;
+     end;
+  end;
   for i := 0 to GlobalShapeList.Count-1 do
-  if (TStringList(GlobalShapeList.Objects[i]).Objects[0] = Sender) then
+  if (TStringList(GlobalShapeList.Objects[i]).Objects[0] = theSender) then
   begin
     TLabel(TStringList(GlobalShapeList.Objects[i]).Objects[1]).Caption:=FieldList.Selected.Caption;
     TLabel(TStringList(GlobalShapeList.Objects[i]).Objects[1]).Visible:=true;
@@ -190,7 +205,7 @@ end;
 procedure TFormulardesigner.MyDragOver(Sender, Source: TObject; X,
   Y: Integer; State: TDragState; var Accept: Boolean);
 begin
-  if Source = FieldList then Accept:=true;
+  if Source = FieldList then Accept:=true else Accept:=false;
 end;
 
 end.
