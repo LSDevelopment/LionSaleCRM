@@ -40,10 +40,17 @@ type
     procedure buttonColumnTwoClick(Sender: TObject);
     procedure buttonColumnThreeClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
+
   private
+    PanelInMove : TPanel;
+    PanelOldPos : integer;
+    MouseOldPos : integer;
     GlobalShapeList : TStringList;
     procedure MyDragOver(Sender, Source: TObject; X, Y: Integer; State: TDragState; var Accept: Boolean);
     procedure MyDragDrop(Sender, Source: TObject; X, Y: Integer);
+    procedure MyPanelMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+    procedure MyPanelMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
+    procedure MyPanelMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure loadfields;
     function makeShape(cols : integer; onScroll : TScrollBox) : TShape;
   public
@@ -93,6 +100,7 @@ var customShape : TShape;
     customEdit  : TEdit;
     i : integer;
     Glo : TStringList;
+    customMovePanel : TPanel;
 begin
   customPanel := TPanel.Create(onScroll);
   customPanel.Parent := onScroll;
@@ -102,6 +110,14 @@ begin
   customPanel.Height:=36;
   customPanel.Align:=alTop;
   customPanel.Top:=10000;
+  customPanel.OnMouseDown:=@MyPanelMouseDown;
+  customPanel.OnMouseMove:=@MyPanelMouseMove;
+  customPanel.OnMouseUp:=@MyPanelMouseUp;
+  customPanel.ParentColor:=False;
+  customPanel.Color:=clWhite;
+  customPanel.Cursor:=crHandPoint;
+
+
 
   for i := 0 to cols-1 do
   begin
@@ -113,14 +129,17 @@ begin
     customShape.Height:=customPanel.Height-4;
     customShape.Width:=(customPanel.Width div cols);
     customShape.Left:=i*(customShape.Width);
-    customShape.Brush.Style:=bsClear;
+    customShape.Brush.Style:=bsSolid;
+    customShape.Brush.Color:=clWhite;
 
     customShape.Left:=customShape.Left+2;
     customShape.Width:=customShape.Width-4;
     customShape.OnDragOver:=@MyDragOver;
     customShape.OnDragDrop:=@MyDragDrop;
-
-
+    customShape.OnMouseDown:=@MyPanelMouseDown;
+    customShape.OnMouseMove:=@MyPanelMouseMove;
+    customShape.OnMouseUp:=@MyPanelMouseUp;
+    customShape.Cursor:=crHandPoint;
 
     customLabel := TLabel.Create(customPanel);
     customLabel.AutoSize:=False;
@@ -133,10 +152,17 @@ begin
     customLabel.Layout:=tlCenter;
     customLabel.Width:=120;
     customLabel.Visible:=false;
-    customLabel.Cursor:=crHandPoint;
     customLabel.DragMode:=dmAutomatic;
     customLabel.OnDragOver:=@MyDragOver;
     customLabel.OnDragDrop:=@MyDragDrop;
+
+    if i = 0 then
+    begin
+      customShape.Left:=customShape.Left+6;
+      customShape.Width:=customShape.Width-6;
+      customLabel.Left:=customLabel.Left+6;
+      customLabel.Width:=customLabel.Width-6;
+    end;
 
     customEdit := TEdit.Create(customPanel);
     customEdit.Parent := customPanel;
@@ -176,6 +202,8 @@ begin
   loadfields;
 end;
 
+
+
 procedure TFormulardesigner.MyDragDrop(Sender, Source: TObject; X,
   Y: Integer);
 var i : integer;
@@ -207,6 +235,42 @@ procedure TFormulardesigner.MyDragOver(Sender, Source: TObject; X,
 begin
   if Source = FieldList then Accept:=true else Accept:=false;
 end;
+
+
+procedure TFormulardesigner.MyPanelMouseDown(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  if Button = mbLeft then
+  begin
+     if sender is TPanel then
+       PanelInMove := TPanel(Sender)
+     else
+       PanelInMove := TPanel(TShape(Sender).Parent);
+     PanelOldPos:= PanelInMove.Top;
+     MouseOldPos:= Y;
+     PanelInMove.Color:=$00F3E2D1;
+  end;
+end;
+
+procedure TFormulardesigner.MyPanelMouseMove(Sender: TObject;
+  Shift: TShiftState; X, Y: Integer);
+begin
+  if PanelInMove <> nil then
+  begin
+    Caption:=IntTOStr(Y-MouseOldPos);
+    PanelInMove.Top:=PanelOldPos+(Y-MouseOldPos);
+    PanelInMove.Color:=$00F3E2D1;
+  end;
+end;
+
+procedure TFormulardesigner.MyPanelMouseUp(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  if PanelInMove = nil then exit;
+  PanelInMove.Color:=clWhite;
+  PanelInMove := nil;
+end;
+
 
 end.
 
